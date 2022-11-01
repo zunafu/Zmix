@@ -55,6 +55,10 @@ if (LOAD_SLASH) {
 }
 else {
     client.on("ready", () => {
+        client.user.setPresence({
+            activities: [{ name: `tara kantutan este kantahan pala :)`, type: ActivityType.Playing }],
+            status: 'online',
+          });
         console.log(`Logged in as ${client.user.tag}`)
     })
     client.on("interactionCreate", (interaction) => {
