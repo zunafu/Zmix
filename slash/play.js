@@ -29,7 +29,12 @@ module.exports = {
 	run: async ({ client, interaction }) => {
 		if (!interaction.member.voice.channel) return interaction.editReply("You need to be in a VC to use this command")
 
-		const queue = await client.player.createQueue(interaction.guild)
+		const queue = await client.player.createQueue(interaction.guild, 
+	{
+            leaveOnEnd: false, //leaveOnEndCooldown doesnt work anymore
+            leaveOnEmpty: false, //Or use `leaveOnEmpty: false` to stay in the vc 24/7, 20000 (ms) is 20s
+            metadata: interaction.channel
+        })
 		if (!queue.connection) await queue.connect(interaction.member.voice.channel)
 
 		let embed = new EmbedBuilder()
